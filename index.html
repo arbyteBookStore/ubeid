@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let currentPage = "HOME";
+
+document.body.style.margin = "0";
+document.body.style.fontFamily = "Segoe UI, Arial";
+document.body.style.background = "#f3f4f6";
+
+// ===== HEADER =====
+const header = document.createElement("div");
+header.style.cssText = `
+  background: #FF0087;
+  color: #ffffff;
+  padding: 22px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+`;
+header.textContent = "Dynamic JavaScript Website";
+document.body.appendChild(header);
+
+// ===== MENU BTN =====
+const menuBtn = document.createElement("div");
+menuBtn.textContent = "☰ MENU";
+menuBtn.style.cssText = `
+  cursor: pointer;
+  padding: 12px 20px;
+  background: #FF7DB0;
+  color: white;
+  font-size: 18px;
+`;
+document.body.appendChild(menuBtn);
+
+// ===== SIDEBAR =====
+const sidebar = document.createElement("div");
+sidebar.style.cssText = `
+  position: fixed;
+  top: 0;
+  left: -240px;
+  width: 220px;
+  height: 100%;
+  background: #B0FFFA;
+  padding-top: 70px;
+  transition: 0.3s;
+`;
+document.body.appendChild(sidebar);
+
+// ===== NAV =====
+const nav = document.createElement("div");
+nav.style.cssText = `
+  background: #020617;
+  padding: 15px;
+  text-align: center;
+`;
+
+// ===== PAGES =====
+const pages = ["HOME", "COURSES", "ABOUT", "CONTACT"];
+const navButtons = {};
+const sideButtons = {};
+
+pages.forEach(p => {
+    // Top nav buttons
+    const b1 = document.createElement("button");
+    b1.textContent = p;
+    b1.style.cssText = `
+      margin: 6px;
+      padding: 10px 18px;
+      background: #cdf;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    `;
+    b1.onclick = () => {
+        if (p === "HOME") loadHome();
+        else if (p === "COURSES") loadCourses();
+        else if (p === "ABOUT") loadAbout();
+        else main.innerHTML = `<h2>${p}</h2><p>Page content coming soon...</p>`;
+    };
+    nav.appendChild(b1);
+    navButtons[p] = b1;
+    
+    // Sidebar buttons
+    const b2 = document.createElement("div");
+    b2.textContent = p;
+    b2.style.cssText = `
+      padding: 14px;
+      color: #020617;
+      cursor: pointer;
+    `;
+    b2.onclick = b1.onclick;
+    sidebar.appendChild(b2);
+    sideButtons[p] = b2;
+});
+
+document.body.appendChild(nav);
+
+// ===== ACTION BAR =====
+const actionBar = document.createElement("div");
+actionBar.style.cssText = `
+  background: #259;
+  padding: 12px;
+  text-align: center;
+`;
+
+const insertBtn = document.createElement("button");
+insertBtn.textContent = "INSERT";
+const replaceBtn = document.createElement("button");
+replaceBtn.textContent = "REPLACE";
+const removeBtn = document.createElement("button");
+removeBtn.textContent = "REMOVE";
+
+[insertBtn, replaceBtn, removeBtn].forEach(b => {
+    b.style.cssText = `
+      margin: 6px;
+      padding: 8px 16px;
+      background: #cdf;
+      border: none;
+      border-radius: 6px;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+    `;
+    actionBar.appendChild(b);
+});
+
+document.body.appendChild(actionBar);
+
+// ===== MAIN =====
+const main = document.createElement("div");
+main.style.cssText = `
+  padding: 25px;
+  min-height: 260px;
+  max-width: 900px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 10px;
+`;
+document.body.appendChild(main);
+
+// ===== FOOTER =====
+const footer = document.createElement("div");
+footer.style.cssText = `
+  background: #259;
+  color: white;
+  text-align: center;
+  padding: 14px;
+`;
+footer.textContent = "cubayd@gmail.com";
+document.body.appendChild(footer);
+
+// ===== MENU TOGGLE =====
+menuBtn.onclick = () => {
+    sidebar.style.left = sidebar.style.left === "0px" ? "-240px" : "0px";
+};
+
+// ===== CONTENT FUNCTIONS =====
+const list = document.createElement("ol");
+
+function loadHome() {
+    currentPage = "HOME";
+    main.innerHTML = `
+        <h2>Home</h2>
+        <p>Welcome to my home page.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quidem, dolore sit obcaecati quam, autem, molestias aliquid fugit voluptas quis aut hic dignissimos...</p>
+    `;
+}
+
+function loadAbout() {
+    currentPage = "ABOUT";
+    main.innerHTML = `
+    <h2>About Me</h2>
+    <div style="display:flex;gap:20px;flex-wrap:nowrap;width:100%;align-items:flex-start;">
+      <img src="my.jpeg" alt="My-Photo" style="width:360px;height:330px;border-radius:8px;object-fit:cover;">
+      <div style="max-width:550px;">
+        <h3>My Name Is Cubayd C/Qadir C/Lahi</h3>
+        <p>I am a student in the Faculty of Computer Science and IT at Jazeera University. <strong>ROOM: 402</strong></p>
+        <p>I’m passionate about programming and solving problems. I enjoy learning new technologies, building projects, and experimenting with JavaScript, HTML, and CSS.</p>
+      </div>
+    </div>
+    `;
+}
+
+function loadCourses() {
+    currentPage = "COURSES";
+    main.innerHTML = "<h2>Courses Examples</h2>";
+    // You can continue your examples list code here (Chapter 7/8/9)
+}
+
+// ===== INIT =====
+loadHome(); // load home page by default
+
+    </script>
+</body>
+</html>
